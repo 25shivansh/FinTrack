@@ -58,5 +58,9 @@
     "react-email": "4.2.3",
     "tailwindcss": "^4.1.10",
     "tw-animate-css": "^1.3.4"
+  },
+  "overrides": {
+  "@bufbuild/protobuf": "1.10.1"
   }
+
 }
