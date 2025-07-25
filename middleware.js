@@ -1,5 +1,5 @@
 import { clerkMiddleware,createRouteMatcher} from '@clerk/nextjs/server';
-import { redirect } from 'next/dist/server/api-utils';
+//import { redirect } from 'next/dist/server/api-utils';
 const isProtectedRoute=createRouteMatcher([
     "/dashboard",
     "/account(.*)",
