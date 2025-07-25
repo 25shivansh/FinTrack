@@ -94,19 +94,31 @@ export function AddTransactionForm({
     }
   };
 
-  const handleScanComplete = (scannedData) => {
-    if (scannedData) {
-      setValue("amount", scannedData.amount.toString());
-      setValue("date", new Date(scannedData.date));
-      if (scannedData.description) {
-        setValue("description", scannedData.description);
-      }
-      if (scannedData.category) {
-        setValue("category", scannedData.category);
-      }
-      toast.success("Receipt scanned successfully");
+const handleScanComplete = (scannedData) => {
+  if (scannedData) {
+    setValue("amount", scannedData.amount.toString());
+    setValue("date", new Date(scannedData.date));
+
+    if (scannedData.description) {
+      setValue("description", scannedData.description);
     }
-  };
+
+    if (scannedData.category) {
+      const matchedCategory = categories.find(
+        (cat) => cat.id.toLowerCase() === scannedData.category.toLowerCase()
+      );
+
+      if (matchedCategory) {
+        setValue("category", matchedCategory.id);
+      } else {
+        toast.warning("Scanned category not recognized. Please select manually.");
+        console.warn("Scanned category not found in list:", scannedData.category);
+      }
+    }
+
+    toast.success("Receipt scanned successfully");
+  }
+};
 
   useEffect(() => {
     if (transactionResult?.success && !transactionLoading) {
